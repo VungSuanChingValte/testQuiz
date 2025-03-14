@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maze Game</title>
+    <style>
+        body { text-align: center; font-family: Arial, sans-serif; }
+        canvas { border: 2px solid black; }
+    </style>
+</head>
+<body>
+    <h1>Maze Game</h1>
+    <canvas id="mazeCanvas" width="600" height="600"></canvas>
+    <script>
+        const canvas = document.getElementById("mazeCanvas");
+        const ctx = canvas.getContext("2d");
+        const maze = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 1],
+            [1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 1],
+            [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+            [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+            [1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+            [1, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1],
+            [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1],
+            [1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1],
+            [1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        ];
+        const tileSize = 40;
+        let player = { x: 1, y: 1 };
+        const goal = { x: 13, y: 7 };
+
+        function drawMaze() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let row = 0; row < maze.length; row++) {
+                for (let col = 0; col < maze[row].length; col++) {
+                    if (maze[row][col] === 1) {
+                        ctx.fillStyle = "black";
+                        ctx.fillRect(col * tileSize, row * tileSize, tileSize, tileSize);
+                    }
+                }
+            }
+            ctx.fillStyle = "green";
+            ctx.fillRect(goal.x * tileSize, goal.y * tileSize, tileSize, tileSize);
+            ctx.fillStyle = "blue";
+            ctx.fillRect(player.x * tileSize, player.y * tileSize, tileSize, tileSize);
+        }
+
+        function movePlayer(dx, dy) {
+            let newX = player.x + dx;
+            let newY = player.y + dy;
+            if (maze[newY][newX] === 0) {
+                player.x = newX;
+                player.y = newY;
+            }
+            if (player.x === goal.x && player.y === goal.y) {
+                alert("You win!");
+            }
+            drawMaze();
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowUp") movePlayer(0, -1);
+            if (e.key === "ArrowDown") movePlayer(0, 1);
+            if (e.key === "ArrowLeft") movePlayer(-1, 0);
+            if (e.key === "ArrowRight") movePlayer(1, 0);
+        });
+
+        drawMaze();
+    </script>
+</body>
+</html>

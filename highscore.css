@@ -1,0 +1,37 @@
+
+
+#highScoreList{
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 4rem;
+}
+
+.high-score{
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+}
+.high-score:hover{
+    transform: scale(1.25);
+}
+.button{
+    font-size:1.8rem;
+    padding:1rem 0;
+    width:20rem;
+    text-align:center;
+    border:0.1rem solid#225786;
+    margin-bottom:1rem;
+    text-decoration:none;
+    color:#1e65a3;
+    background-color:whitesmoke;
+}
+.button:hover{
+    cursor:pointer;
+    box-shadow:0 1.5rem 1.4rem 0 rgba(86,185,235,0.5);
+    transform:translateY(-0.1rem);
+    transition:transform 150ms;
+}
+.button[disabled]:hover{
+    cursor:not-allowed;
+    box-shadow: none;
+    transform: none;
+}
